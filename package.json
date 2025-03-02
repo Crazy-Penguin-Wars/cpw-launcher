@@ -1,8 +1,8 @@
 {
   "name": "CPW",
-  "productName": "CPW",
-  "version": "1.6.1",
-  "description": "CPW App",
+  "productName": "Crazy Penguin Wars",
+  "version": "1.0.0",
+  "description": "Game Launcher for Crazy Penguin Wars",
   "main": "src/main.js",
   "scripts": {
     "start": "electron-forge start",
@@ -25,7 +25,7 @@
       "makers": [{
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "cpw",
+            "name": "Crazy Penguin Wars",
             "authors": "CPW",
             "loadingGif": "./src/assets/default-splash.gif",
             "setupIcon": "./lib/icons/icon.ico"
@@ -49,8 +49,8 @@
         }, {
           "name": "@electron-forge/maker-flatpak",
           "config": {
-            "genericName": "CPW",
-            "productName": "CPW",
+            "genericName": "Crazy Penguin Wars",
+            "productName": "Crazy Penguin Wars",
             "categories": [
               "Game"
             ],
