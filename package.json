@@ -22,7 +22,8 @@
       "packagerConfig": {
         "icon": "lib/icons/icon.icns"
       },
-      "makers": [{
+      "makers": [
+        {
           "name": "@electron-forge/maker-squirrel",
           "config": {
             "name": "Crazy Penguin Wars",
@@ -30,23 +31,28 @@
             "loadingGif": "./src/assets/default-splash.gif",
             "setupIcon": "./lib/icons/icon.ico"
           }
-        }, {
+        },
+        {
           "name": "@electron-forge/maker-zip",
           "platforms": [
             "darwin"
           ]
-        }, {
+        },
+        {
           "name": "@electron-forge/maker-dmg",
           "config": {
             "format": "ULFO"
           }
-        }, {
+        },
+        {
           "name": "@electron-forge/maker-deb",
           "config": {}
-        }, {
+        },
+        {
           "name": "@electron-forge/maker-rpm",
           "config": {}
-        }, {
+        },
+        {
           "name": "@electron-forge/maker-flatpak",
           "config": {
             "genericName": "Crazy Penguin Wars",
@@ -54,9 +60,11 @@
             "categories": [
               "Game"
             ],
-            "modules": [{
+            "modules": [
+              {
                 "name": "zypak",
-                "sources": [{
+                "sources": [
+                  {
                     "type": "git",
                     "url": "https://github.com/refi64/zypak",
                     "tag": "v2022.04"
@@ -68,10 +76,10 @@
             "baseVersion": "22.08",
             "icon": "./lib/icons/icon.ico"
           }
-
         }
       ],
-      "publishers": [{
+      "publishers": [
+        {
           "name": "@electron-forge/publisher-github",
           "config": {
             "repository": {
@@ -85,7 +93,8 @@
     }
   },
   "build": {
-    "extraResources": [{
+    "extraResources": [
+      {
         "from": "./lib/",
         "to": "lib",
         "filter": [
@@ -106,7 +115,8 @@
     "directories": {
       "buildResources": "lib"
     },
-    "protocols": [{
+    "protocols": [
+      {
         "name": "cpw",
         "schemes": [
           "cpw"
@@ -134,5 +144,6 @@
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
     "@electron-forge/publisher-github": "^6.0.0-beta.54",
     "electron": "11.1.1"
-  }
+  },
+  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
 }

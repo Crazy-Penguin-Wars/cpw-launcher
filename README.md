@@ -19,3 +19,9 @@ To run the NewCP client, use the following command:
 ```
 yarn start
 ```
+
+### Map-editor test maps
+
+The launcher accepts `cpw://test-map?url=<encoded-url>`, where the encoded URL is a `/test-map` launch URL returned by the CPW demo server. It only accepts the configured hosted server and `http://127.0.0.1:8000`, then loads the map in the existing Flash window. The map editor creates this handoff automatically through **Test in game**.
+
+The default game server remains `https://michielvde.eu.pythonanywhere.com`. Set `CPW_SERVER_URL` before starting the launcher to use another trusted default server during development.
