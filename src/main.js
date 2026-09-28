@@ -6,9 +6,6 @@ const { DEFAULT_SERVER_URL, ALLOWED_SERVER_ORIGINS } = require("./config");
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) app.quit();
 
-// Check for updates except for macOS
-if (process.platform != "darwin") require("update-electron-app")({ repo: "New-Club-Penguin/NewCP-App-Build" });
-
 const pluginPaths = {
   win32: path.join(path.dirname(__dirname), "lib/pepflashplayer.dll"),
   darwin: path.join(path.dirname(__dirname), "lib/PepperFlashPlayer.plugin"),
