@@ -23,13 +23,14 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "icon": "lib/icons/icon.icns"
+        "icon": "lib/icons/icon.icns",
+        "executableName": "CPW"
       },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "Crazy Penguin Wars",
+            "name": "CPW",
             "authors": "CPW",
             "loadingGif": "./src/assets/default-splash.gif",
             "setupIcon": "./lib/icons/icon.ico"
@@ -40,12 +41,6 @@
           "platforms": [
             "darwin"
           ]
-        },
-        {
-          "name": "@electron-forge/maker-dmg",
-          "config": {
-            "format": "ULFO"
-          }
         },
         {
           "name": "@electron-forge/maker-deb",
@@ -140,7 +135,6 @@
     "@electron-forge/cli": "^6.0.0-beta.54",
     "@electron-forge/maker-appx": "^6.0.0-beta.54",
     "@electron-forge/maker-deb": "^6.0.0-beta.54",
-    "@electron-forge/maker-dmg": "^6.0.0-beta.54",
     "@electron-forge/maker-flatpak": "^6.0.0-beta.64",
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
