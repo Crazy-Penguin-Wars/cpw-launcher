@@ -69,3 +69,23 @@ jobs:
         run: yarn run publish-mac
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build DMG (MAC)
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          npx --yes create-dmg "out/Crazy Penguin Wars-darwin-x64/Crazy Penguin Wars.app" out/make || true
+          DMG_FILE=$(find out/make -maxdepth 1 -name "*.dmg" | head -n 1)
+          if [ -z "$DMG_FILE" ]; then
+            echo "No DMG was produced by create-dmg"
+            exit 1
+          fi
+          echo "Found DMG: $DMG_FILE"
+          echo "DMG_FILE=$DMG_FILE" >> "$GITHUB_ENV"
+
+      - name: Upload DMG to Release (MAC)
+        if: startsWith(matrix.os, 'macos')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          gh release upload "v$VERSION" "$DMG_FILE" --clobber
