@@ -15,17 +15,27 @@ jobs:
     name: Build CPW-App
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [macos-latest, ubuntu-latest, windows-2022]
 
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: '24.x'
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+        
+      - name: Setup MSBuild
+        if: startsWith(matrix.os, 'windows')
+        uses: microsoft/setup-msbuild@v2
 
       - name: Install dependencies
         run: yarn
@@ -33,6 +43,7 @@ jobs:
       - name: Install flatpak
         if: startsWith(matrix.os, 'ubuntu')
         run: |
+          sudo apt-get update
           sudo apt-get install flatpak -y
           sudo apt-get install flatpak-builder -y
           sudo apt-get install elfutils -y
