@@ -73,14 +73,31 @@ jobs:
       - name: Build DMG (MAC)
         if: startsWith(matrix.os, 'macos')
         run: |
-          npx --yes create-dmg "out/Crazy Penguin Wars-darwin-x64/Crazy Penguin Wars.app" out/make || true
-          DMG_FILE=$(find out/make -maxdepth 1 -name "*.dmg" | head -n 1)
-          if [ -z "$DMG_FILE" ]; then
-            echo "No DMG was produced by create-dmg"
+          set -e
+          APP_PATH="out/Crazy Penguin Wars-darwin-x64/Crazy Penguin Wars.app"
+          STAGING_DIR="dmg-staging"
+          DMG_PATH="out/make/Crazy Penguin Wars.dmg"
+
+          if [ ! -d "$APP_PATH" ]; then
+            echo "Packaged app not found at $APP_PATH"
             exit 1
           fi
-          echo "Found DMG: $DMG_FILE"
-          echo "DMG_FILE=$DMG_FILE" >> "$GITHUB_ENV"
+
+          mkdir -p "$STAGING_DIR" out/make
+          cp -R "$APP_PATH" "$STAGING_DIR/"
+          ln -s /Applications "$STAGING_DIR/Applications"
+
+          hdiutil create -volname "Crazy Penguin Wars" \
+            -srcfolder "$STAGING_DIR" \
+            -ov -format UDZO \
+            "$DMG_PATH"
+
+          if [ ! -f "$DMG_PATH" ]; then
+            echo "hdiutil did not produce a DMG"
+            exit 1
+          fi
+          echo "Built DMG: $DMG_PATH"
+          echo "DMG_FILE=$DMG_PATH" >> "$GITHUB_ENV"
 
       - name: Upload DMG to Release (MAC)
         if: startsWith(matrix.os, 'macos')
